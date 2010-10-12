@@ -5,7 +5,7 @@
   - *emms* utilities for EMMS
   - *prog* utilities for programming modes
   - *skels* skeletons for source files
-  - *net* utilities for networking (w3m &c.)
+  - *net* utilities for networking (w3m, weather &c.)
   - *sys* generic utilities for external programs
   - *bmk* a web bookmark manager
 
