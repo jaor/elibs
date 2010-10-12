@@ -1,0 +1,40 @@
+#!/bin/bash
+
+font=${EC_TERM_FACE:-xft:Inconsolata:size=11,[codeset=iso8859-7]xft:Andale Mono:size=12}
+
+frg="grey55"
+bkg="grey1"
+bw=4
+bw=${EC_TERM_BORDER:-3}
+tr="-tr -sh 8"
+tr="+tr"
+
+exec urxvtcd -cr tomato -sl 0 +rv +ptab +ssr -b $bw -bd "$bkg" \
+             -bg "$bkg" -fg "$frg" \
+             +sbg $tr -fn "${font}" -name "emacsclient" \
+             -xrm "*colorBD: ${frg}" \
+             -xrm "*colorUL: ${frg}" \
+             -xrm "*color0: ${frg}" \
+             -xrm "*color8: grey20" \
+             -xrm "*color1: tan3" \
+             -xrm "*color9: sienna3" \
+             -xrm "*color2: peachpuff4" \
+             -xrm "*color10: navajowhite4" \
+             -xrm "*color3: grey40" \
+             -xrm "*color11: darkseagreen4" \
+             -xrm "*color4: #9D9064" \
+             -xrm "*color12: #BAA68F" \
+             -xrm "*color5: cornsilk3" \
+             -xrm "*color13: sienna4" \
+             -xrm "*color6: grey40" \
+             -xrm "*color14: tan4" \
+             -xrm "*color7: ${frg}" \
+             -xrm "*color15: grey50" \
+             -e emacsclient -t $*
+
+
+
+# fname=${EC_XTERM_FN:-Inconsolata}
+# fsize=${EC_XTERM_FS:-11}
+# exec xterm -cr tomato -sl 0 +rv -b 4 -bg "$bkg" -bd "$bkg" -fg "$frg" \
+#            -bdc -ulc -u8 -fa "$fname" -fs $fsize -name "emacsclient" \

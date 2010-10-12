@@ -1,0 +1,31 @@
+/* XPM */
+static char *folder-closed[] = {
+/* columns rows colors chars-per-pixel */
+"16 16 9 1",
+"  c gray100",
+". c #FFFFCC",
+"X c #CCCCFF",
+"o c #C0C0C0",
+"O c #9999FF",
+"+ c #6666CC",
+"@ c #222222",
+"# c black",
+"$ c None",
+/* pixels */
+"$$$$$$$$$$$$$$$$",
+"$$$$$$$$$$$$$$$$",
+"$$$$$$$$$$$$$$$$",
+"$$$$$$$$$$$$$$$$",
+"$$++++O$$$$$$$$$",
+"$+ XXO.++++++$$$",
+"+ XXXXXXXXXXXO$$",
+"+ OXOXOXOXOXO+$$",
+"+ XOXOXOXOXOX+#$",
+"+ OXOXOXOXOXO+#$",
+"+ XOXOXOXOXOX+#$",
+"+ OXOXOXOXOXO+#$",
+"+ XOXOXOXOXOX+#$",
+"+XOXOXOXOXOXO+#$",
+"++++++++++++++#$",
+"$#@@###########$"
+};

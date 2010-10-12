@@ -1,0 +1,40 @@
+#!/bin/bash
+
+font=${EC_TERM_FACE:-xft:Inconsolata:size=11,[codeset=iso8859-7]xft:Andale Mono:size=12,[codeset=japanese-jisx0208]xft:Andale Mono:size=12}
+ifont=${EC_TERM_FACE_ITALIC:-xft:Inconsolata-11:slant=italic}
+#font="xft:DejaVu Sans Mono-9"
+#ifont="xft:DejaVu Sans Mono-9:italic"
+
+frg="black"
+bkg="#EFEBE7"
+
+bw=${EC_TERM_BORDER:-2}
+tr=${EC_TRANS_SPEC}
+
+exec urxvtcd $tr -cr tomato +ptab -bg "$bkg" -bd "$bkg" -fg "$frg" \
+             -sl 0 +rv +ssr -b $bw +sbg -fn "${font}" -fi "${ifont}" \
+             -xrm "*colorBD: grey20" \
+             -xrm "*colorUL: grey20" \
+             -xrm "*color0: ${frg}" \
+             -xrm "*color8: grey20" \
+             -xrm "*color1: sienna3" \
+             -xrm "*color9: orangered4" \
+             -xrm "*color2: #597B59" \
+             -xrm "*color10: #254242" \
+             -xrm "*color3: #D38108" \
+             -xrm "*color11: #59513A" \
+             -xrm "*color4: #3B3152" \
+             -xrm "*color12: lemonchiffon4" \
+             -xrm "*color5: #E0DACC" \
+             -xrm "*color13: #386858" \
+             -xrm "*color6: lightyellow3" \
+             -xrm "*color14: #1F3D4F" \
+             -xrm "*color7: ${bkg}" \
+             -xrm "*color15: #EFEBE7" \
+             -name "emacsclient" \
+             -e emacsclient -t $*
+
+# fname=${EC_XTERM_FN:-Inconsolata}
+# fsize=${EC_XTERM_FS:-11}
+# exec xterm -cr tomato -sl 0 +rv -b "$bw" -bg "$bkg" -bd "$bkg" -fg "$frg" \
+#            -bdc -ulc -u8 -fa "$fname" -fs $fsize \

@@ -1,0 +1,31 @@
+/* XPM */
+static char *document[] = {
+/* columns rows colors chars-per-pixel */
+"16 16 9 1",
+"  c gray100",
+". c #CECEBF",
+"X c gray80",
+"o c #272724",
+"O c black",
+"+ c black",
+"@ c black",
+"# c black",
+"$ c None",
+/* pixels */
+"$oooooooooo$$$$$",
+"$o........oO$$$$",
+"$o........oXO$$$",
+"$o........oooo$$",
+"$o...........o$$",
+"$o...........o$$",
+"$o..o.oo.oo..o$$",
+"$o...........o$$",
+"$o..oooo.oo..o$$",
+"$o...........o$$",
+"$o..oo.oo.o..o$$",
+"$o...........o$$",
+"$o...........o$$",
+"$o...........o$$",
+"$o...........o$$",
+"$ooooooooooooo$$"
+};

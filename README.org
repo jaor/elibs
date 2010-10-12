@@ -1,0 +1,10 @@
+* Elisp libraries
+
+  - *themes* color themes based on Emacs builtin custom themes
+  - *org* utilities for org-mode
+  - *emms* utilities for EMMS
+  - *prog* utilities for programming modes
+  - *skels* skeletons for source files
+  - *net* utilities for networking (w3m &c.)
+  - *sys* generic utilities for external programs
+  - *bmk* a web bookmark manager
