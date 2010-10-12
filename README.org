@@ -8,3 +8,5 @@
   - *net* utilities for networking (w3m &c.)
   - *sys* generic utilities for external programs
   - *bmk* a web bookmark manager
+
+  See also my [[http://git.hacks-galore.org/gitweb/jao?p=emacs.git;a=tree;f=custom;hb=HEAD][emacs custom files]].
