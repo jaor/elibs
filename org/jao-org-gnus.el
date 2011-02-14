@@ -5,7 +5,7 @@
       (gnus-article-show-summary))
     (let* ((group gnus-newsgroup-name)
            (method (gnus-find-method-for-group group)))
-      (when (eq 'nnml (car method))
+      (when (memq (car method) '(nnml nntp))
         (let* ((article (gnus-summary-article-number))
                (header (gnus-summary-article-header article))
                (from (mail-header-from header))
