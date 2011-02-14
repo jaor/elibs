@@ -476,6 +476,7 @@
             (magit-item-highlight (p hilite))
             (magit-item-mark (p warning))
             (magit-log-head-label (p keyword) bf)
+            (magit-log-graph bf)
             (magit-log-tag-label (p keyword))
             (match (p hilite))
             (menu nil)

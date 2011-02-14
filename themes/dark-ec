@@ -1,12 +1,9 @@
 #!/bin/bash
 
-# font=${EC_TERM_FACE:-xft:Andale Mono:size=11}
-font=${EC_TERM_FACE:-xft:Inconsolata:size=11,[codeset=iso8859-7]xft:Andale Mono:size=12}
-# font=${EC_TERM_FACE:-xft:Terminus:size=12,[codeset=iso8859-7]xft:Andale Mono:size=12}
-# font=${EC_TERM_FACE:-xft:DejaVu Sans Mono:size=11}
+font=${EC_TERM_FACE:-xft:Terminus:size=12,[codeset=iso8859-7]xft:Andale Mono:size=12}
 
 frg="grey50"
-bkg="black"
+bkg="#050505"
 bw=${EC_TERM_BORDER:-2}
 tr=${EC_TRANS_SPEC}
 
@@ -19,7 +16,7 @@ exec urxvtcd -cr tomato -sl 0 +ptab +rv +ssr -b $bw -bd "$bkg" \
              -xrm "*color8: grey20" \
              -xrm "*color1: lightgoldenrod3" \
              -xrm "*color9: sienna3" \
-             -xrm "*color2: darkslategray" \
+             -xrm "*color2: darkseagreen4" \
              -xrm "*color10: #44836e" \
              -xrm "*color3: grey40" \
              -xrm "*color11: #648f81" \
@@ -28,15 +25,7 @@ exec urxvtcd -cr tomato -sl 0 +ptab +rv +ssr -b $bw -bd "$bkg" \
              -xrm "*color5: paleturquoise4" \
              -xrm "*color13: aquamarine4" \
              -xrm "*color6: grey7" \
-             -xrm "*color14: azure4" \
+             -xrm "*color14: grey40" \
              -xrm "*color7: ${frg}" \
              -xrm "*color15: grey50" \
              -e emacsclient -t $*
-
-
-#             -xrm "*color6: #3F4D5C" \
-
-# fname=${EC_XTERM_FN:-Inconsolata}
-# fsize=${EC_XTERM_FS:-11}
-# exec xterm -cr tomato -sl 0 +rv -b 4 -bg "$bkg" -bd "$bkg" -fg "$frg" \
-#            -bdc -ulc -u8 -fa "$fname" -fs $fsize -name "emacsclient" \

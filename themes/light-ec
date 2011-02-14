@@ -1,18 +1,17 @@
 #!/bin/bash
 
-font=${EC_TERM_FACE:-xft:Inconsolata:size=11,[codeset=iso8859-7]xft:Andale Mono:size=12,[codeset=japanese-jisx0208]xft:Andale Mono:size=12}
-ifont=${EC_TERM_FACE_ITALIC:-xft:Inconsolata-11:slant=italic}
-#font="xft:DejaVu Sans Mono-9"
-#ifont="xft:DejaVu Sans Mono-9:italic"
+font=${EC_TERM_FACE:-xft:Inconsolata:size=11,[codeset=iso8859-7]xft:Andale Mono:size=12,[codeset=japanese-jisx0208]xft:Sazanami Gothic}
+# font="xft:Liberation Mono-9"
 
 frg="black"
 bkg="#EFEBE7"
 
-bw=${EC_TERM_BORDER:-2}
+bw=${EC_TERM_BORDER:-1}
 tr=${EC_TRANS_SPEC}
 
 exec urxvtcd $tr -cr tomato +ptab -bg "$bkg" -bd "$bkg" -fg "$frg" \
-             -sl 0 +rv +ssr -b $bw +sbg -fn "${font}" -fi "${ifont}" \
+             -sl 0 +rv +ssr -b $bw +sbg -fn "${font}" \
+	     -tn "rxvt-256color" \
              -xrm "*colorBD: grey20" \
              -xrm "*colorUL: grey20" \
              -xrm "*color0: ${frg}" \
