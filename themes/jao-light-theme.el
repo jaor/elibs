@@ -54,17 +54,18 @@
                                               (c nil 6) bf)
             (company-tooltip-selection (~ company-tooltip) bf nul)
             (compilation-info (c nil nil) bf)
+            (cursor (c 1 1))
             (fringe (c 11 nil))
             (gnus-summary-selected (c nil "white"))
-            (header-line (~ mode-line-inactive) (c 14))
+            (header-line (c nil "white"))
             (mode-line (c 0 7) :box (:line-width -1 :color "grey60"))
             (mode-line-inactive (~ mode-line) (c 12))
             (org-hide (c 7 nil))
             (vertical-border (c 12 nil))
             (w3m-image (c 3))
-            (w3m-tab-selected (c nil "white") nbf)
+            (w3m-tab-selected (c 9 15) bf)
             (w3m-tab-selected-retrieving (~ w3m-tab-selected) (c 1))
-           (w3m-tab-background (c 7 7) nul))
+            (w3m-tab-background (c 15 15) nul))
   (:x-colors "black" "sienna3" "#597B59" "#D38108" "#3B3152"
              "#E0DACC" "lightyellow3"
              "#EFEBE7" "grey20" "orangered4" "darkslategray" "#59513A"
