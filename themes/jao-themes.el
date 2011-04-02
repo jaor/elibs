@@ -1,3 +1,5 @@
+(require 'cl)
+
 ;;; palette
 (defvar jao-themes--face-family "Inconsolata")
 (defvar jao-themes--fg "black")
