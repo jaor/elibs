@@ -9,6 +9,9 @@
   (interactive)
   (message "%s" (or (jao-org-link-at-point) "No link at point")))
 
+(defun jao-org-insert-link (url title)
+  (insert (format "[[%s][%s]]" url title)))
+
 ;;; eldoc
 (defun jao-org-eldoc--hook ()
   (set (make-local-variable 'eldoc-documentation-function)

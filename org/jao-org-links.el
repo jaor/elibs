@@ -1,4 +1,6 @@
-(require 'org)
+(require 'jao-org-utils)
+
+(autoload 'jao-as-safari-doc "jao-applescript.el")
 
 ;; doc links
 (defvar jao-org--sink-dir "./")
@@ -25,5 +27,11 @@
 
 (defun jao-org-links-setup (sink-dir)
   (setq jao-org--sink-dir (file-name-as-directory sink-dir)))
+
+(defun jao-org-insert-safari-link ()
+  (interactive)
+  (let ((ln (jao-as-safari-doc)))
+    (when ln (jao-org-insert-link (car ln) (cdr ln)))))
+
 
 (provide 'jao-org-links)
