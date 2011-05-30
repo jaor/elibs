@@ -1,4 +1,4 @@
-(jao-define-custom-theme jao-dark-theme
+(jao-define-custom-theme jao-dark
   (:palette (fg unspecified "grey55")
             (bg unspecified "grey2")
             (box "yellow" "grey30")

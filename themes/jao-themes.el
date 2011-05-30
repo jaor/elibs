@@ -643,7 +643,7 @@
   (let ((result))
     (dolist (f t-faces (reverse result))
       (let ((xfb (cdr (assq (car f) x-faces))))
-        (push `(,(car f) ((((type x darwin)) ,@xfb)
+        (push `(,(car f) ((((type x ns)) ,@xfb)
                           (t ,@(cdr f)))) result)))))
 
 (defun jao-themes--set-fbg (kind)
@@ -682,6 +682,9 @@
          (provide-theme ',name)))))
 
 (put 'jao-define-custom-theme 'lisp-indent-function 1)
+
+(add-to-list 'custom-theme-load-path (file-name-directory load-file-name))
+
 
 
 (provide 'jao-themes)
