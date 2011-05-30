@@ -36,7 +36,23 @@
   (if (eq system-type 'darwin)
       (let ((path (jao-devon-path dvp)))
         (when path
-          (jao-as-tell-app "DEVONThink Pro" (jao-devon-open-as path) t)))
+          (jao-as-tell-app "DEVONThink Pro" (jao-devon-open-as path))))
     (browse-url (jao-devon-url dvp))))
+
+(defun jao-devon-add-html-page (title url html)
+  (let ((as (format "tell application id \"com.devon-technologies.thinkpro2\" to create record with {name:%S, type:html, URL:%S, source:%S}"
+                    title url html)))
+    (do-applescript as)))
+
+(defun jao-devon-add-w3m-page ()
+  "Add current w3m page to devonthink."
+  (interactive)
+  (let ((title (w3m-current-title))
+        (url w3m-current-url))
+    (when url
+      (w3m-view-source)
+      (let ((html (buffer-substring-no-properties (point-min) (point-max))))
+        (jao-devon-add-html-page title url html))
+      (w3m-view-source))))
 
 (provide 'jao-devon)
