@@ -20,23 +20,23 @@
  (concat "set rs to the selection
   set r to item 1 of rs
   set rn to the name of r
-  set rl to the location of r
+  set rl to the reference URL of r
   set ru to the URL of r
-  rl & rn & \"" *jao-devon-sep* "\" & ru"))
+  \"[[\" & rl & \"" *jao-devon-sep*
+  "\" & ru & \"][\" & rn & \"]]\""))
 
 (defun jao-devon-selection ()
-  (interactive)
   (jao-as-tell-app "DEVONThink Pro" *jao-devon-sel-as*))
 
-(defun jao-devon-open-as (path)
-  (concat "set r to get record at \"" path "\""
-          "\n open window for record r\n activate"))
+;; (defun jao-devon-open-as (path)
+;;   (concat "set r to get record at \"" path "\""
+;;           "\n open window for record r\n activate"))
 
 (defun jao-devon-open (dvp)
   (if (eq system-type 'darwin)
-      (let ((path (jao-devon-path dvp)))
-        (when path
-          (jao-as-tell-app "DEVONThink Pro" (jao-devon-open-as path))))
+      (let* ((path (jao-devon-path dvp))
+             (cmd (and path (format "open x-devonthink-item:%s" path))))
+        (when cmd (shell-command-to-string cmd)))
     (browse-url (jao-devon-url dvp))))
 
 (defun jao-devon-add-html-page (title url html)

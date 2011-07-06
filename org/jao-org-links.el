@@ -1,4 +1,5 @@
 (require 'jao-org-utils)
+(require 'jao-devon)
 
 (autoload 'jao-as-safari-doc "jao-applescript.el")
 
@@ -17,6 +18,13 @@
                                           jao-org--sink-dir link link))))
         (shell-command (format "mv %s %s" real-file dest-path))))
     (browse-url (format "file://%s" (expand-file-name  dest-path)))))
+
+;; devon links
+(org-add-link-type "x-devonthink-item" 'jao-devon-open 'identity)
+
+(defun jao-org-insert-devon-link ()
+  (interactive)
+  (insert (jao-devon-selection)))
 
 (defsubst jao-org--title->file (title)
   (concat (mapconcat 'downcase (split-string title nil t) "-") ".pdf"))
