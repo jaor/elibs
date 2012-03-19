@@ -1,13 +1,14 @@
 (require 'org)
 
 ;;; links
-(defun jao-org-link-at-point ()
+(defun jao-org-link-at-point (&optional copy)
   (when (thing-at-point-looking-at "\\[\\[\\([^]]+\\)\\]\\[[^]]+\\]\\]")
+    (when copy (kill-ring-save (match-beginning 1) (match-end 1)))
     (match-string-no-properties 1)))
 
 (defun jao-org-copy-link-at-point ()
   (interactive)
-  (message "%s" (or (jao-org-link-at-point) "No link at point")))
+  (message "%s" (or (jao-org-link-at-point t) "No link at point")))
 
 (defun jao-org-insert-link (url title)
   (insert (format "[[%s][%s]]" url title)))
