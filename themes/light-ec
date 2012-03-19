@@ -9,6 +9,7 @@ bkg="#EFEBE7"
 
 bw=${EC_TERM_BORDER:-1}
 tr=${EC_TRANS_SPEC}
+usr=${EC_USR_OPTS}
 
 exec urxvtcd $tr -cr tomato +ptab -bg "$bkg" -bd "$bkg" -fg "$frg" \
              -sl 0 +rv +ssr -b $bw +sbg -fn "${font}" \
@@ -30,7 +31,7 @@ exec urxvtcd $tr -cr tomato +ptab -bg "$bkg" -bd "$bkg" -fg "$frg" \
              -xrm "*color14: #1F3D4F" \
              -xrm "*color7: ${bkg}" \
              -xrm "*color15: #EFEBE7" \
-             -name "emacsclient" \
+             -name "emacsclient" ${usr} \
              -e emacsclient -t $*
 
 # fname=${EC_XTERM_FN:-Inconsolata}

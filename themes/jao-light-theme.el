@@ -5,7 +5,7 @@
             (button ((c 13 nil) nbf nul) (bx))
             (hilite ((c nil 5)))
             (strike-through ((c 1)) (st))
-            (italic ((c 4) nbf it) (dfg dbg it))
+            (italic ((c 10) nbf it) (dfg dbg it))
             (link ((c 8) ul nbf))
             (visited-link (link))
             (tab-sel ((~ mode-line)))
@@ -39,11 +39,12 @@
           (gnus-summary-selected (c 13 nil) nul)
           (gnus-summary-normal-unread (c 0 nil))
           (header-line (c nil 5) nul)
-          (italic it)
+;;          (italic it)
           (mode-line (c 11 5) nbf nul)
           (mode-line-inactive (c 11 6) nbf nul)
           (org-hide (c 7 7))
           (vertical-border (c 11 nil) :inherit nil)
+          (w3m-tab-selected (c 9 15) bf)
           (w3m-link-numbering (c 12))
           (w3m-bold (c nil nil) bf)
           (w3m-image (c 3))
@@ -74,4 +75,3 @@
              "lemonchiffon4" "#386858" "#223142" "#EFEBE7"))
 
 (provide 'jao-light-theme)
-

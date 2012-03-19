@@ -2,10 +2,13 @@
 
 font=${EC_TERM_FACE:-xft:Terminus:size=12,[codeset=iso8859-7]xft:Andale Mono:size=12}
 
-frg="grey50"
-bkg="#050505"
+frg="grey60"
+bkg="#101010"
+bkg="black"
+bkg="grey5"
 bw=${EC_TERM_BORDER:-2}
 tr=${EC_TRANS_SPEC}
+usr=${EC_USR_OPTS}
 
 exec urxvtcd -cr tomato -sl 0 +ptab +rv +ssr -b $bw -bd "$bkg" \
              -bg "$bkg" -fg "$frg" \
@@ -28,4 +31,5 @@ exec urxvtcd -cr tomato -sl 0 +ptab +rv +ssr -b $bw -bd "$bkg" \
              -xrm "*color14: grey40" \
              -xrm "*color7: ${frg}" \
              -xrm "*color15: grey50" \
+             ${usr} \
              -e emacsclient -t $*
