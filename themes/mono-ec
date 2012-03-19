@@ -1,0 +1,18 @@
+#!/bin/bash
+
+font=${EC_TERM_FACE:-xft:Terminus:size=12,[codeset=iso8859-7]xft:Andale Mono:size=12}
+
+frg="grey65"
+bkg="#101010"
+bkg="black"
+bw=${EC_TERM_BORDER:-2}
+tr=${EC_TRANS_SPEC}
+usr=${EC_USR_OPTS}
+
+exec urxvtcd -cr tomato -sl 0 +ptab +rv +ssr -b $bw -bd "$bkg" \
+             -bg "$bkg" -fg "$frg" \
+             +sbg -fn "${font}" -name "emacsclient" \
+             -xrm "*colorBD: ${frg}" \
+             -xrm "*colorUL: ${frg}" \
+             ${usr} ${tr} -tr \
+             -e emacsclient -t $*
