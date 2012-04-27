@@ -8,7 +8,7 @@ frg="black"
 bkg="#EFEBE7"
 
 bw=${EC_TERM_BORDER:-1}
-tr=${EC_TRANS_SPEC}
+tr=${EC_TRANS_SPEC:-+tr}
 usr=${EC_USR_OPTS}
 
 exec urxvtcd $tr -cr tomato +ptab -bg "$bkg" -bd "$bkg" -fg "$frg" \

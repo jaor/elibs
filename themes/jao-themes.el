@@ -47,16 +47,47 @@
          (jao-themes--normalize-body
           (apply 'append (mapcar 'jao-themes--parse-face-sym f))))))
 
-(defvar jao-themes--cidxs
-  '("black" "red" "green" "yellow" "blue" "magenta" "cyan" "white"
-    "brightblack" "brightred" "brightgreen" "brightyellow" "brightblue"
-    "brightmagenta" "brightcyan" "brightwhite"))
+(defvar jao-themes--default-cidxs
+  '("#000000" "#cd0000" "#00cd00" "#cdcd00" "#0000cd" "#cd00cd" "#00cdcd" "#e5e5e5"
+    "#4d4d4d" "#ff0000" "#00ff00" "#ffff00" "#0000ff" "#ff00ff" "#00ffff" "#ffffff"
+    "#000000" "#00002a" "#000055" "#000080" "#0000aa" "#0000d4" "#002a00" "#002a2a"
+    "#002a55" "#002a80" "#002aaa" "#002ad4" "#005500" "#00552a" "#005555" "#005580"
+    "#0055aa" "#0055d4" "#008000" "#00802a" "#008055" "#008080" "#0080aa" "#0080d4"
+    "#00aa00" "#00aa2a" "#00aa55" "#00aa80" "#00aaaa" "#00aad4" "#00d400" "#00d42a"
+    "#00d455" "#00d480" "#00d4aa" "#00d4d4" "#2a0000" "#2a002a" "#2a0055" "#2a0080"
+    "#2a00aa" "#2a00d4" "#2a2a00" "#2a2a2a" "#2a2a55" "#2a2a80" "#2a2aaa" "#2a2ad4"
+    "#2a5500" "#2a552a" "#2a5555" "#2a5580" "#2a55aa" "#2a55d4" "#2a8000" "#2a802a"
+    "#2a8055" "#2a8080" "#2a80aa" "#2a80d4" "#2aaa00" "#2aaa2a" "#2aaa55" "#2aaa80"
+    "#2aaaaa" "#2aaad4" "#2ad400" "#2ad42a" "#2ad455" "#2ad480" "#2ad4aa" "#2ad4d4"
+    "#550000" "#55002a" "#550055" "#550080" "#5500aa" "#5500d4" "#552a00" "#552a2a"
+    "#552a55" "#552a80" "#552aaa" "#552ad4" "#555500" "#55552a" "#555555" "#555580"
+    "#5555aa" "#5555d4" "#558000" "#55802a" "#558055" "#558080" "#5580aa" "#5580d4"
+    "#55aa00" "#55aa2a" "#55aa55" "#55aa80" "#55aaaa" "#55aad4" "#55d400" "#55d42a"
+    "#55d455" "#55d480" "#55d4aa" "#55d4d4" "#800000" "#80002a" "#800055" "#800080"
+    "#8000aa" "#8000d4" "#802a00" "#802a2a" "#802a55" "#802a80" "#802aaa" "#802ad4"
+    "#805500" "#80552a" "#805555" "#805580" "#8055aa" "#8055d4" "#808000" "#80802a"
+    "#808055" "#808080" "#8080aa" "#8080d4" "#80aa00" "#80aa2a" "#80aa55" "#80aa80"
+    "#80aaaa" "#80aad4" "#80d400" "#80d42a" "#80d455" "#80d480" "#80d4aa" "#80d4d4"
+    "#aa0000" "#aa002a" "#aa0055" "#aa0080" "#aa00aa" "#aa00d4" "#aa2a00" "#aa2a2a"
+    "#aa2a55" "#aa2a80" "#aa2aaa" "#aa2ad4" "#aa5500" "#aa552a" "#aa5555" "#aa5580"
+    "#aa55aa" "#aa55d4" "#aa8000" "#aa802a" "#aa8055" "#aa8080" "#aa80aa" "#aa80d4"
+    "#aaaa00" "#aaaa2a" "#aaaa55" "#aaaa80" "#aaaaaa" "#aaaad4" "#aad400" "#aad42a"
+    "#aad455" "#aad480" "#aad4aa" "#aad4d4" "#d40000" "#d4002a" "#d40055" "#d40080"
+    "#d400aa" "#d400d4" "#d42a00" "#d42a2a" "#d42a55" "#d42a80" "#d42aaa" "#d42ad4"
+    "#d45500" "#d4552a" "#d45555" "#d45580" "#d455aa" "#d455d4" "#d48000" "#d4802a"
+    "#d48055" "#d48080" "#d480aa" "#d480d4" "#d4aa00" "#d4aa2a" "#d4aa55" "#d4aa80"
+    "#d4aaaa" "#d4aad4" "#d4d400" "#d4d42a" "#d4d455" "#d4d480" "#d4d4aa" "#d4d4d4"
+    "#080808" "#121212" "#1c1c1c" "#262626" "#303030" "#3a3a3a" "#444444" "#4e4e4e"
+    "#585858" "#626262" "#6c6c6c" "#767676" "#808080" "#8a8a8a" "#949494" "#9e9e9e"
+    "#a8a8a8" "#b2b2b2" "#bcbcbc" "#c6c6c6" "#d0d0d0" "#dadada" "#e4e4e4" "#eeeeee"))
 
+(defvar jao-themes--cidxs nil)
 (defvar jao-themes--x-colors nil)
 
 (defun jao-themes--color (clr)
   (cond ((stringp clr) clr)
         ((numberp clr) (or (nth clr jao-themes--cidxs)
+                           (nth clr jao-themes--default-cidxs)
                            (format "color-%s" clr)))
         (t 'unspecified)))
 
@@ -93,7 +124,7 @@
 
 (defun jao-themes--make-faces (fs &optional cidxs)
   (let ((*jao--parsed-faces* nil)
-        (jao-themes--cidxs (or cidxs jao-themes--cidxs))
+        (jao-themes--cidxs (or cidxs jao-themes--default-cidxs))
         (result nil))
     (dolist (f (sort (jao-themes--dfs fs) 'jao--cmp-faces) (reverse result))
       (let ((body (jao-themes--parse-face-body (cdr f))))
@@ -207,6 +238,9 @@
             (darcsum-need-action-face (p warning))
             (darcsum-need-action-marked-face bf (p warning))
             (diary (p f02))
+            (dictionary-button-face (p link))
+            (dictionary-reference-face (p f11))
+            (dictionary-word-entry-face (p f10))
             (diff-added (p warning))
             (diff-changed (p f02))
             (diff-context (p dimm))
@@ -266,6 +300,18 @@
             (epa-validity-high bf)
             (epa-validity-low)
             (epa-validity-medium)
+            (erc-action-face (p f02))
+            (erc-button (p link))
+            (erc-current-nick-face (p error))
+            (erc-error-face (p error))
+            (erc-header-line (~ header))
+            (erc-input-face (p warning))
+            (erc-nick-default-face (p f11))
+            (erc-nick-msg-face (p warning))
+            (erc-notice-face (p dimm))
+            (erc-pal-face (p warning))
+            (erc-prompt-face (f 01))
+            (erc-timestamp-face (p dimm))
             (escape-glyph (p dimm))
             (eshell-ls-archive (p f12))
             (eshell-ls-backup (p dimm))
@@ -415,7 +461,7 @@
             (gnus-x-face)
             (gui-button-face (~ button))
             (gui-element (~ gui-button-face)))
-          `((header-line (~ mode-line))
+          `((header-line (~ mode-line-inactive))
             (help-argument-name)
             (highlight (p hilite)))
           `((ido-first-match (p warning))
@@ -487,7 +533,7 @@
             (magit-log-head-label-local (p keyword) bf)
             (magit-log-head-label-remote (p function) bf)
             (magit-log-head-label-tags (p warning) nbf)
-            (magit-log-graph bf)
+            (magit-log-graph (p f11))
             (magit-log-tag-label (p keyword))
             (magit-section-title (~ outline-2))
             (match (p hilite))
