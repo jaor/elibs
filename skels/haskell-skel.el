@@ -1,5 +1,5 @@
 ;;; haskell-skel.el --- skeleton for haskell source files
-;; Copyright (C) 2003, 2004, 2005, 2009, 2010 Jose A Ortega Ruiz
+;; Copyright (C) 2003, 2004, 2005, 2009, 2010, 2012 Jose A Ortega Ruiz
 
 ;; Author: Jose A Ortega Ruiz <jao@member.fsf.org>
 ;; Keywords: languages
@@ -31,7 +31,8 @@
 ;;; Auxiliar
 (defun jao-skel--read-haskell-module ()
   (let* ((ddir (jao-relative-path "\\.cabal\\'"))
-         (mbase (and ddir (concat (replace-in-string ddir "/" ".") ".")))
+         (mbase (and ddir (concat (replace-regexp-in-string "/" "." ddir)
+                                  ".")))
          (m (read-string "Module prefix (empty for no module): "
                          (concat (or mbase "") (jao-basename)))))
     (or m "")))
