@@ -6,8 +6,8 @@
             (hilite ((c nil 5)))
             (strike-through ((c 1)) (st))
             (italic (it))
-            (link ((c 10) ul nbf))
-            (visited-link ((c 8) ul))
+            (link ((c 23) nul nbf nit))
+            (visited-link ((c 24) nul))
             (tab-sel ((~ mode-line)))
             (tab-unsel ((~ mode-line-inactive)))
             (comment ((c 239) it)) ;; italic
