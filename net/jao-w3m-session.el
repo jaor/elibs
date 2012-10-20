@@ -1,6 +1,6 @@
 ;;; w3m-session.el --- Persistent emacs-w3m sessions
 
-;; Copyright (C) 2003, 2004, 2006, 2007, 2008, 2009  Jose A Ortega Ruiz
+;; Copyright (C) 2003, 2004, 2006, 2007, 2008, 2009, 2012  Jose A Ortega Ruiz
 
 ;; Author: Jose A Ortega Ruiz <jao@member.fsf.org>
 ;; Version: 0.3.6
@@ -271,7 +271,7 @@ the session is already displayed in a w3m tab, jao-w3m-session can:
 
 ;;;; save session on exit
 (add-to-list 'kill-emacs-query-functions
-             '(lambda () (jao-w3m-session-save) t))
+             (lambda () (jao-w3m-session-save) t))
 
 
 ;;;; auxiliary functions

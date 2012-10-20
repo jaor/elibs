@@ -142,10 +142,10 @@ machine xoap.weather.com port http login xxxxx password xxxxxx"
 
 (defun jao-weather--format-fields (data fields sep)
   (if data
-      (mapconcat '(lambda (kv)
-                    (let ((v (cdr (assoc (car kv) data))))
-                      (if (not v) ""
-                        (format (or (cdr kv) "%s") v))))
+      (mapconcat (lambda (kv)
+                   (let ((v (cdr (assoc (car kv) data))))
+                     (if (not v) ""
+                       (format (or (cdr kv) "%s") v))))
              fields
              sep)
     ""))
