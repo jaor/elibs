@@ -5,7 +5,7 @@ font=${EC_TERM_FACE:-xft:Terminus:size=12,[codeset=iso8859-7]xft:Andale Mono:siz
 frg="grey60"
 bkg="#101010"
 bkg="black"
-bkg="grey5"
+# bkg="grey5"
 bw=${EC_TERM_BORDER:-2}
 tr=${EC_TRANS_SPEC}
 usr=${EC_USR_OPTS}
@@ -17,7 +17,7 @@ exec urxvtcd -cr tomato -sl 0 +ptab +rv +ssr -b $bw -bd "$bkg" \
              -xrm "*colorUL: ${frg}" \
              -xrm "*color0: ${bkg}" \
              -xrm "*color8: grey20" \
-             -xrm "*color1: lightgoldenrod3" \
+             -xrm "*color1: lightgoldenrod4" \
              -xrm "*color9: sienna3" \
              -xrm "*color2: darkseagreen4" \
              -xrm "*color10: #44836e" \

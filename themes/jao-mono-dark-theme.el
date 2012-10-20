@@ -12,10 +12,10 @@
             (tab-unsel ((c 245 232) bx))
             (comment ((c 242) nit))
             (keyword ((c 151) nbf nul nit) ((c "darkseagreen2")))
-            (function ((c 108) nul nbf) ((c "aquamarine3")))
+            (function ((c 115) nul nbf) ((c "aquamarine3"))) ;; 108
             (type ((c 72) nbf) ((c "lightyellow3")))
             (variable-name ((c nil)))
-            (constant ((c 66)) ((p function)))
+            (constant ((c 72)) ((p function)))
             (string ((c 36)) ((c "aquamarine4")))
             (warning ((c 144)) ((c "lightgoldenrod3")))
             (error ((c 95)) ((c "goldenrod3")))
