@@ -1,6 +1,6 @@
 ;; common definitions and functions
 
-;; Copyright (C) 2004, 2005, 2006, 2007, 2008, 2009, 2010 Jose Antonio Ortega Ruiz
+;; Copyright (C) 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2012 Jose Antonio Ortega Ruiz
 
 ;; Author: Jose A Ortega Ruiz <jao@gnu.org>
 ;; Keywords: tools
@@ -27,6 +27,7 @@
 ;;; Code:
 
 (require 'skeleton)
+(require 'autoinsert)
 
 (defvar jao-company-name nil
   "Company name used in copyright notice")
