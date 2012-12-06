@@ -51,7 +51,7 @@
           (widget-button (c 196))
           (widget-field (c 143 236)))
   (:x-faces (gnus-button (c "lightyellow3") nul)
-            (gnus-summary-selected (p hilite))
+            (gnus-summary-selected ul)
             (gnus-summary-cancelled  (c "dark slate gray" nil) st)
             (header-line (c 243 235))
             (jabber-roster-user-dnd (p warning))
