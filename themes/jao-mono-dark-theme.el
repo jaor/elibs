@@ -47,7 +47,7 @@
           (vertical-border (c 59 nil) :inherit nil)
           (w3m-image (c 144))
           (w3m-tab-background (c 0 0) ul)
-          (w3m-tab-line (c 0 0))
+          (w3m-tab-line (c 0 0) ul)
           (widget-button (c 196))
           (widget-field (c 143 236)))
   (:x-faces (gnus-button (c "lightyellow3") nul)
