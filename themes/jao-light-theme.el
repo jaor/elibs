@@ -2,7 +2,7 @@
   (:palette (fg unspecified "black")
             (bg unspecified "white")
             (box "magenta" "antiquewhite3")
-            (button ((c 13 nil) nbf nul) (bx))
+            (button ((c 13 nil) nbf nul) (~ mode-line-inactive))
             (hilite ((c nil 15))) ;; 5
             (strike-through ((c 1)) (st))
             (italic (it) (nit (c 96)))
