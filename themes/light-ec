@@ -11,6 +11,8 @@ usr=${EC_USR_OPTS}
 font=$EC_TERM_FACE
 ifont=$EC_TERM_ITALIC_FACE
 
+exec xterm $usr -b $bw -fg "$frg" -bg "$bkg" -e emacsclient -t $*
+
 exec urxvtcd $tr -cr tomato +ptab -bg "$bkg" -bd "$bkg" -fg "$frg" \
              -sl 0 +rv +ssr -b $bw +sbg -fn "${font}" -fi "${ifont}" \
              -xrm "*colorBD: grey20" \
@@ -33,4 +35,3 @@ exec urxvtcd $tr -cr tomato +ptab -bg "$bkg" -bd "$bkg" -fg "$frg" \
              -xrm "*color15: #EFEBE7" \
              -name "emacsclient" ${usr} \
              -e emacsclient -t $*
-
