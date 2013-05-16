@@ -1,6 +1,6 @@
 ;; jao-emms-info-track.el -- utilities to show tracks
 
-;; Copyright (C) 2009, 2010 Jose Antonio Ortega Ruiz
+;; Copyright (C) 2009, 2010, 2013 Jose Antonio Ortega Ruiz
 
 ;; Author: Jose Antonio Ortega Ruiz <jao@gnu.org>
 ;; Start date: Sat Jul 04, 2009 13:47
@@ -21,6 +21,7 @@
 ;;; Code:
 
 (require 'emms)
+(require 'emms-tag-editor)
 (require 'jao-osd)
 (require 'jao-emms)
 
@@ -110,13 +111,25 @@
   (when jao-emms-show-osd-p (jao-emms-show-osd))
   t)
 
-(defun jao-emms-info-setup (&optional show-osd show-echo-line)
+(defun jao-emms-install-i3dv2 ()
+  (add-to-list 'emms-tag-editor-tagfile-functions
+               '("mp3" "id3v2" ((info-artist      . "a")
+                                (info-title       . "t")
+                                (info-album       . "A")
+                                (info-tracknumber . "T")
+                                (info-year        . "y")
+                                (info-genre       . "g")
+                                (info-composer    . "-TCOM")
+                                (info-note        . "c")))))
+
+(defun jao-emms-info-setup (&optional show-osd show-echo-line no-id3)
   (setq emms-track-description-function 'jao-emms-info-track-description)
   (setq jao-emms-show-osd-p show-osd)
   (add-hook 'emms-player-started-hook 'jao-emms-show-osd-hook)
   (unless show-echo-line
     (eval-after-load 'emms-player-mpd
-      '(remove-hook 'emms-player-started-hook 'emms-player-mpd-show))))
+      '(remove-hook 'emms-player-started-hook 'emms-player-mpd-show)))
+  (unless no-id3 (jao-emms-install-i3dv2)))
 
 
 (provide 'jao-emms-info-track)
