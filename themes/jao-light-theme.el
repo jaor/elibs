@@ -62,7 +62,7 @@
             (gnus-summary-cancelled (c 1) st)
             (header-line (c nil "#efebe7"))
             (mode-line (c "grey15" 7) :box (:line-width -1 :color "grey90"))
-            (mode-line-inactive (c "grey30")
+            (mode-line-inactive (c "grey30" "grey97")
                                 :box (:line-width -1 :color "grey90"))
             (org-hide (c "white" "white"))
             (vertical-border (c "grey70" nil))
