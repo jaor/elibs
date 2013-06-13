@@ -54,6 +54,7 @@
             (gnus-button (c nil nil) nbf)
             (compilation-info (c 14 nil) nbf)
             (cursor (c 1 1))
+            (diary (p error) nbf)
             (diff-hl-change (c "white" "light goldenrod yellow"))
             (diff-hl-insert (c "white" "honeydew2"))
             (diff-hl-delete (c "white" "moccasin"))
