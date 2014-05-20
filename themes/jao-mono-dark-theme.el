@@ -1,5 +1,5 @@
 (jao-define-custom-theme jao-mono-dark
-  (:palette (fg unspecified "grey75")
+  (:palette (fg unspecified "grey60")
             (bg unspecified "grey2")
             (box "color-237" "grey25")
             (button ((c 240) nul) ((c "aquamarine4")))
@@ -10,11 +10,11 @@
             (visited-link ((c 36) nul) ((c "aquamarine3") nul))
             (tab-sel ((c 252 232) nbf))
             (tab-unsel ((c 245 232) bx))
-            (comment ((c 29) nit) ((c nil) :height 95
+            (comment ((c 29) nit) ((c nil) :height 110
                                    :family "Inconsolata LGC" it))
             (keyword ((c 151) nbf nul nit) ((c "darkseagreen3")))
             (function ((c 115) nul nbf) ((c "aquamarine3"))) ;; 108
-            (type ((c 72) nbf) ((c "lightyellow3")))
+            (type ((c 72) nbf) ((c "lightyellow4")))
             (variable-name ((c nil)))
             (constant ((c 72)) ((p function)))
             (string ((c 36)) ((c "aquamarine4")))
@@ -51,8 +51,11 @@
           (w3m-tab-line (c 0 0) ul)
           (widget-button (c 196))
           (widget-field (c 143 236)))
-  (:x-faces (gnus-button (c "lightyellow3") nul)
-            (gnus-summary-selected ul)
+  (:x-faces (diff-hl-change (c "red"))
+            (diff-hl-insert (c "green"))
+            (diff-hl-delete (c "yellow"))
+            (gnus-button (c "lightyellow3") nul)
+            (gnus-summary-selected nul bf)
             (gnus-summary-cancelled  (c "dark slate gray" nil) st)
             (header-line (c 243 235))
             (mode-line (c "grey75" "grey20") nbf nul bx)

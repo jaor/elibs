@@ -5,7 +5,7 @@
             (button ((c 11) nul))
             (hilite ((c nil 8)))
             (strike-through ((c 8)))
-            (italic ((c 101) nul) (it :family "DejaVu Sans" :height 90))
+            (italic ((c 101) nul) (it :family "DejaVu Sans Mono" :height 120))
             (link ((c 2) nul))
             (visited-link ((c 2) nul))
             (tab-sel ((c 9 8) nbf))
