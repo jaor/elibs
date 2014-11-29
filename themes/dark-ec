@@ -1,22 +1,22 @@
 #!/bin/bash
 
-font=${EC_TERM_FACE:-xft:Terminus:size=12,[codeset=iso8859-7]xft:Andale Mono:size=12}
+font=${EC_TERM_FACE:-xft:Inconsolata-11}
+ifont=${EC_TERM_ITALIC_FACE}
 
-font=${EC_TERM_FACE:-xft:Inconsolata:size=10}
-
-frg="grey60"
-bkg="#101010"
+frg="grey80"
 bkg="black"
-bkg="rgba:0000/0000/0000/6666"
-bkg="grey5"
 bw=${EC_TERM_BORDER:-2}
 tr=${EC_TRANS_SPEC}
-# tr="+tr"
 usr=${EC_USR_OPTS}
 
-exec xterm -cr tomato -b $bw -fa $font -fi $EC_TERM_ITALIC_FACE \
-           -fg $frg -bg $bkg
-           -e emacsclient -t $*
+exec urxvtcd $tr -cr tomato +ptab -bg "$bkg" -bd "$bkg" -fg "$frg" \
+             -sl 0 +rv +ssr -b $bw +sbg -fn "${font}" -fi "${ifont}" \
+             -name "emacsclient" ${usr} \
+#             -e emacsclient -t $*
+
+# exec xterm -cr tomato -b $bw -fa $font -fi $EC_TERM_ITALIC_FACE \
+#            -fg $frg -bg $bkg
+#            -e emacsclient -t $*
 
 exec urxvtcd -cr tomato -sl 0 +ptab +rv +ssr -b $bw -bd "$bkg" \
              -bg "$bkg" -fg "$frg" \

@@ -10,8 +10,9 @@
             (visited-link ((c 36) nul) ((c "aquamarine3") nul))
             (tab-sel ((c 252 232) nbf))
             (tab-unsel ((c 245 232) bx))
-            (comment ((c 29) nit) ((c nil) :height 110
-                                   :family "Inconsolata LGC" it))
+            ;; (comment ((c 102) it) ((c nil) :height 100
+            ;;                       :family "Inconsolata LGC" it))
+            (comment ((c 102) it) ((c nil) it))
             (keyword ((c 151) nbf nul nit) ((c "darkseagreen3")))
             (function ((c 115) nul nbf) ((c "aquamarine3"))) ;; 108
             (type ((c 72) nbf) ((c "lightyellow4")))
