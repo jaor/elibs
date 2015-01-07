@@ -507,6 +507,7 @@
             (info-title-2 (~ outline-2) bf)
             (info-title-3 (~ outline-3) bf)
             (info-title-4 (~ outline-4) bf)
+            (Info-quoted (p f01))
             (info-xref link)
             (info-xref-visited vlink)
             (isearch bf (p hilite))
