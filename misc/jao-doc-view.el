@@ -1,6 +1,6 @@
 ;; jao-doc-view.el -- Remembering visited documents
 
-;; Copyright (c) 2013 Jose Antonio Ortega Ruiz
+;; Copyright (c) 2013, 2015 Jose Antonio Ortega Ruiz
 
 ;; This file is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -26,21 +26,36 @@
 ;;; Code:
 
 (defvar jao-doc-view-bmk-file "~/.emacs.d/doc-view-bmk")
+(defvar jao-doc-view-session-file "~/.emacs.d/doc-view-session")
 (defvar jao-doc-view--current-bmks nil)
 
-(defun jao-doc-view--read-bmks ()
-  (let* ((buff (find-file-noselect jao-doc-view-bmk-file))
-         (bmks (ignore-errors
-                 (with-current-buffer buff
-                   (goto-char (point-min)))
-                 (read buff))))
-    (if (hash-table-p bmks) bmks (make-hash-table :test 'equal))))
+(defun jao-doc-view--save-bmk ()
+  (when (or (eq major-mode 'doc-view-mode)
+            (eq major-mode 'pdf-view-mode))
+    (ignore-errors
+      (puthash (buffer-file-name)
+               (or (if (fboundp 'pdf-view-current-page)
+                       (pdf-view-current-page)
+                     (doc-view-current-page))
+                   1)
+               (jao-doc-view--current-bmks)))))
 
-(defun jao-doc-view--save-bmks ()
-  (with-current-buffer (find-file-noselect jao-doc-view-bmk-file)
+(defun jao-doc-view--read-file (file)
+  (let ((buff (find-file-noselect file)))
+    (ignore-errors
+      (with-current-buffer buff
+        (goto-char (point-min)))
+      (read buff))))
+
+(defun jao-doc-view--save-to-file (file value)
+  (with-current-buffer (find-file-noselect file)
     (erase-buffer)
-    (insert (format "%S" (jao-doc-view--current-bmks)))
+    (insert (format "%S" value))
     (save-buffer)))
+
+(defun jao-doc-view--read-bmks ()
+  (let ((bmks (jao-doc-view--read-file jao-doc-view-bmk-file)))
+    (if (hash-table-p bmks) bmks (make-hash-table :test 'equal))))
 
 (defun jao-doc-view--current-bmks ()
   (or jao-doc-view--current-bmks
@@ -55,20 +70,38 @@
                 (setq buffs (cdr buffs))))))
     (when (not b)
       (find-file file)
-      (doc-view-goto-page (gethash (expand-file-name file)
-                                   (jao-doc-view--current-bmks) 1)))))
+      (let ((p (gethash (expand-file-name file)
+                        (jao-doc-view--current-bmks)
+                        0)))
+        (when (and (numberp p) (> p 0))
+          (if (fboundp 'pdf-view-goto-page)
+              (pdf-view-goto-page p)
+            (doc-view-goto-page p))))
+      (jao-doc-view--save-bmks))))
 
-(defun jao-doc-view--save-hook ()
-  (when (eq major-mode 'doc-view-mode)
-    (ignore-errors (puthash (buffer-file-name)
-                            (doc-view-current-page)
-                            (jao-doc-view--current-bmks))
-                   (jao-doc-view--save-bmks))))
+
+(defun jao-doc-view-session (&optional file)
+  (let ((file (or file jao-doc-view-session-file)))
+    (jao-doc-view--read-file file)))
+
+(defun jao-doc-view-load-session (&optional file)
+  (interactive)
+  (let ((docs (jao-doc-view-session file)))
+    (when (not (listp docs)) (error "Empty session"))
+    (dolist (d docs) (jao-doc-view-open d))))
+
+(defun jao-doc-view--save-bmks ()
+  (let ((docs '()))
+    (dolist (b (buffer-list))
+      (with-current-buffer b
+        (when (jao-doc-view--save-bmk)
+          (add-to-list 'docs (buffer-file-name)))))
+    (jao-doc-view--save-to-file jao-doc-view-session-file docs))
+  (jao-doc-view--save-to-file jao-doc-view-bmk-file
+                              (jao-doc-view--current-bmks)))
 
 (eval-after-load "doc-view"
-  '(progn
-     (add-hook 'kill-buffer-hook 'jao-doc-view--save-hook)
-     (add-hook 'kill-emacs-hook 'jao-doc-view--save-bmks)))
+  '(add-hook 'kill-buffer-hook 'jao-doc-view--save-bmk))
 
 
 
