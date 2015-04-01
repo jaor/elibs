@@ -29,17 +29,6 @@
 (defvar jao-doc-view-session-file "~/.emacs.d/doc-view-session")
 (defvar jao-doc-view--current-bmks nil)
 
-(defun jao-doc-view--save-bmk ()
-  (when (or (eq major-mode 'doc-view-mode)
-            (eq major-mode 'pdf-view-mode))
-    (ignore-errors
-      (puthash (buffer-file-name)
-               (or (if (fboundp 'pdf-view-current-page)
-                       (pdf-view-current-page)
-                     (doc-view-current-page))
-                   1)
-               (jao-doc-view--current-bmks)))))
-
 (defun jao-doc-view--read-file (file)
   (let ((buff (find-file-noselect file)))
     (ignore-errors
@@ -61,6 +50,23 @@
   (or jao-doc-view--current-bmks
       (setq jao-doc-view--current-bmks (jao-doc-view--read-bmks))))
 
+(defun jao-doc-view-purge-bmks ()
+  (interactive)
+  (let ((ht jao-doc-view--current-bmks))
+    (when ht
+      (maphash (lambda (k v)
+                 (when (or (= 1 v) (not (file-exists-p k)))
+                   (remhash k ht)))
+               ht))))
+
+(defun jao-doc-view--goto-bmk ()
+  (interactive)
+  (let ((p (gethash (expand-file-name (buffer-file-name))
+                    (jao-doc-view--current-bmks)
+                    1)))
+    (when (and (numberp p) (> p 1))
+      (ignore-errors (pdf-view-goto-page p)))))
+
 (defun jao-doc-view-open (file)
   (let* ((buffs (buffer-list))
          (b (catch 'done
@@ -68,17 +74,7 @@
                 (when (string-equal (buffer-file-name (car buffs)) file)
                   (throw 'done (car buffs)))
                 (setq buffs (cdr buffs))))))
-    (when (not b)
-      (find-file file)
-      (let ((p (gethash (expand-file-name file)
-                        (jao-doc-view--current-bmks)
-                        0)))
-        (when (and (numberp p) (> p 0))
-          (if (fboundp 'pdf-view-goto-page)
-              (pdf-view-goto-page p)
-            (doc-view-goto-page p))))
-      (jao-doc-view--save-bmks))))
-
+    (if b (pop-to-buffer b) (find-file file))))
 
 (defun jao-doc-view-session (&optional file)
   (let ((file (or file jao-doc-view-session-file)))
@@ -90,18 +86,49 @@
     (when (not (listp docs)) (error "Empty session"))
     (dolist (d docs) (jao-doc-view-open d))))
 
-(defun jao-doc-view--save-bmks ()
-  (let ((docs '()))
-    (dolist (b (buffer-list))
-      (with-current-buffer b
-        (when (jao-doc-view--save-bmk)
-          (add-to-list 'docs (buffer-file-name)))))
-    (jao-doc-view--save-to-file jao-doc-view-session-file docs))
+(defun jao-doc-view-save-bmks ()
+  (jao-doc-view-purge-bmks)
   (jao-doc-view--save-to-file jao-doc-view-bmk-file
                               (jao-doc-view--current-bmks)))
 
-(eval-after-load "doc-view"
-  '(add-hook 'kill-buffer-hook 'jao-doc-view--save-bmk))
+(defun jao-doc-view--save-bmk (&rest ignored)
+  (when (or (eq major-mode 'doc-view-mode)
+            (eq major-mode 'pdf-view-mode))
+    (ignore-errors
+      (puthash (buffer-file-name)
+               (max (pdf-view-current-page) 1)
+               (jao-doc-view--current-bmks)))))
+
+(defun jao-doc-view-save-session (&optional skip-current)
+  (interactive)
+  (let ((docs '())
+        (cb (when skip-current (current-buffer))))
+    (dolist (b (buffer-list))
+      (with-current-buffer b
+        (when (and (equalp major-mode 'pdf-view-mode)
+                   (not (equalp cb b)))
+          (add-to-list 'docs (buffer-file-name)))))
+    (jao-doc-view--save-to-file jao-doc-view-session-file docs)))
+
+(defun jao-doc-view--save-session-1 ()
+  (when (equalp major-mode 'pdf-view-mode)
+    (jao-doc-view-purge-bmks)
+    (jao-doc-view-save-session t)))
+
+(defun jao-doc-view-install ()
+  (add-hook 'kill-buffer-hook 'jao-doc-view--save-bmk)
+  (add-hook 'kill-buffer-hook 'jao-doc-view--save-session-1)
+  (add-hook 'kill-emacs-hook 'jao-doc-view-save-bmks)
+  (add-hook 'pdf-view-mode-hook 'jao-doc-view--goto-bmk t)
+  (add-hook 'pdf-view-mode-hook 'jao-doc-view-save-session t)
+  (dolist (c '(pdf-view-next-page-command
+               pdf-view-scroll-up-or-next-page
+               pdf-view-next-line-or-next-page
+               pdf-view-previous-page-command
+               pdf-view-scroll-down-or-previous-page
+               pdf-view-previous-line-or-previous-page
+               pdf-view-goto-page))
+    (advice-add c :after #'jao-doc-view--save-bmk)))
 
 
 
