@@ -603,6 +603,8 @@
             (magit-log-head-label-tags (p warning) nbf)
             (magit-log-graph (p f11))
             (magit-log-tag-label (p keyword))
+            (magit-section-highlight (p hilite))
+            (magit-section-heading (~ outline-2))
             (magit-section-title (~ outline-2))
             (match (p hilite))
             (markdown-italic-face (~ italic))
