@@ -588,6 +588,7 @@
             (lui-button-face (p link))
             (lui-time-stamp-face (p dimm)))
           `((magit-branch (p f00))
+            (magit-cherry-equivalent (p warning))
             (magit-diff-add (~ diff-added))
             (magit-diff-del (~ diff-removed))
             (magit-diff-file-header (~ diff-file-header))
