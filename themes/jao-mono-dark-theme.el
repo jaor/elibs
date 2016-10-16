@@ -1,13 +1,13 @@
 (jao-define-custom-theme jao-mono-dark
   (:palette (fg unspecified "grey60")
-            (bg unspecified "grey2")
+            (bg unspecified "grey10")
             (box "color-237" "grey25")
             (button ((c 240) nul) ((c "aquamarine4")))
             (hilite ((c nil 238)))
             (strike-through ((c 237)) (st))
             (italic ((c 137) it) (it (c "lightyellow3")))
             (link ((c 108) nul) ((c "aquamarine3") nit nul))
-            (visited-link ((c 36) nul) ((c "aquamarine3") nul))
+            (visited-link ((c 36) nul) ((c "dodgerblue4") nul))
             (tab-sel ((c 252 232) nbf))
             (tab-unsel ((c 245 232) bx))
             ;; (comment ((c 102) it) ((c nil) :height 100
