@@ -4,8 +4,7 @@ font=${EC_TERM_FACE:-xft:Terminus:size=12,[codeset=iso8859-7]xft:Andale Mono:siz
 ifont=${EC_TERM_ITALIC_FACE:-$font}
 
 frg="grey65"
-bkg="#101010"
-bkg="black"
+bkg="#3f3f3f"
 bw=${EC_TERM_BORDER:-2}
 tr=${EC_TRANS_SPEC}
 usr=${EC_USR_OPTS}
@@ -15,5 +14,5 @@ exec urxvtcd -cr tomato -sl 0 +ptab +rv +ssr -b $bw -bd "$bkg" \
              +sbg -fn "${font}" -fi "${ifont}" -name "emacsclient" \
              -xrm "*colorBD: ${frg}" \
              -xrm "*colorUL: ${frg}" \
-             ${usr} ${tr} -tr \
+             ${usr} ${tr} \
              -e emacsclient -t $*

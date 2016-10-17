@@ -5,11 +5,11 @@
 
 (zenburn-with-color-variables
   (let ((f (jao-themes-parse-faces
-            `(
-              (circe-originator-face (c ,zenburn-yellow-1))
+            `((circe-originator-face (c ,zenburn-yellow-1))
               (diff-hl-change (c nil ,zenburn-blue-4))
               (diff-hl-delete (c nil ,zenburn-red-1))
               (diff-hl-insert (c nil ,zenburn-green))
+              (font-lock-function-name-face (c ,zenburn-orange) nbf)
               (fringe (c nil nil))
               (gnus-summary-cancelled (c ,zenburn-red) st)
               (link (c ,zenburn-yellow) nbf nul)
@@ -24,10 +24,9 @@
               (w3m-header-line-location-content (c ,zenburn-yellow))
               (w3m-header-line-location-title nil)
               (w3m-tab-background (~ mode-line))
-              (w3m-tab-selected (c ,zenburn-red+1 ,zenburn-bg))
-              (w3m-tab-unselected (c ,zenburn-fg "grey30") bx nil)
-              (w3m-tab-unselected-unseen (~ w3m-tab-unselected))
-              ))))
+              (w3m-tab-selected (c ,zenburn-red+1 ,zenburn-bg) bf bx)
+              (w3m-tab-unselected (c ,zenburn-fg "grey30") bx)
+              (w3m-tab-unselected-unseen (~ w3m-tab-unselected))))))
     (apply 'custom-theme-set-faces (cons 'zenburn f))))
 
 (provide 'jao-zenburn-theme)
