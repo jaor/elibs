@@ -1,6 +1,6 @@
 ;; jao-emms-info-track.el -- utilities to show tracks
 
-;; Copyright (C) 2009, 2010, 2013 Jose Antonio Ortega Ruiz
+;; Copyright (C) 2009, 2010, 2013, 2017 Jose Antonio Ortega Ruiz
 
 ;; Author: Jose Antonio Ortega Ruiz <jao@gnu.org>
 ;; Start date: Sat Jul 04, 2009 13:47
@@ -103,7 +103,7 @@
 (defun jao-emms-show-osd ()
   (interactive)
   (let ((str (jao-emms-current-track-str)))
-    (when str (jao-osd-cat 'emms (substring str 2)))
+    (when str (jao-notify (substring str 2)))
     t))
 
 (defun jao-emms-show-osd-hook ()

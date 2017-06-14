@@ -2,6 +2,7 @@
 (defvar jao-osd-cat-color-fg "black")
 (defvar jao-osd-cat-color-bg "white")
 (defvar jao-osd-cat-font "Andika Basic 16")
+;; (setq jao-osd-cat-font "Inconsolata 20")
 (defun jao-osd-cat-font (&optional font)
   (or font jao-osd-cat-font))
 
@@ -51,5 +52,11 @@
   (maphash (lambda (n p) (ignore-errors (kill-process p))) jao-osd-processes)
   (clrhash jao-osd-processes))
 
-(provide 'jao-osd)
+(defun jao-notify (msg &optional title icon)
+  (let ((args (if title (format "'%s' '%s'" msg title) (format "'%s'" msg)))
+        (iflag (if (and (stringp icon) (file-exists-p icon))
+                   (format " -i %s" icon)
+                 "")))
+    (shell-command-to-string (format "notify-send %s%s" args iflag))))
 
+(provide 'jao-osd)

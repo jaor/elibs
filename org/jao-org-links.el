@@ -5,7 +5,7 @@
 
 ;; doc links
 (defvar jao-org--sink-dir "./")
-(org-add-link-type "doc" 'jao-org-follow-doc 'identity)
+
 (defun jao-org-follow-doc (link)
   (let ((dest-path (concat "./doc/"
                            (and (boundp 'docs-dir)
@@ -34,6 +34,7 @@
   (insert (format "[[doc:%s][%s]]" (jao-org--title->file title) title)))
 
 (defun jao-org-links-setup (sink-dir)
+  (org-add-link-type "doc" 'jao-org-follow-doc 'identity)
   (setq jao-org--sink-dir (file-name-as-directory sink-dir)))
 
 (defun jao-org-insert-safari-link ()
