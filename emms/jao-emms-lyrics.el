@@ -1,6 +1,6 @@
 ;; jao-emms-lyrics.el -- simple show lyrics in emms
 
-;; Copyright (C) 2009, 2010 Jose Antonio Ortega Ruiz
+;; Copyright (C) 2009, 2010, 2017 Jose Antonio Ortega Ruiz
 
 ;; Author: Jose Antonio Ortega Ruiz <jao@gnu.org>
 ;; Start date: Sat Jul 04, 2009 13:41
@@ -96,44 +96,14 @@
 
 
 
-(defconst jao-emms--wiki-fmt
-  (concat"http://lyrics.wikia.com/api.php?action=lyrics&fmt=xml&func=getSong"
-         "&artist=%s&song=%s"))
-
-(defun jao-emms-show-lyrics/wiki ()
-  (interactive)
-  (let* ((a/t (jao-emms-lyrics-track-data))
-         (artist (car a/t))
-         (title (cdr a/t))
-         (buffer (jao-emms-lyrics-buffer))
-         (url (format jao-emms--wiki-fmt
-                      (url-hexify-string artist)
-                      (url-hexify-string title)))
-         (url-request-method "GET")
-         (data-buffer (url-retrieve-synchronously url))
-         (inhibit-read-only t))
-    (set-buffer data-buffer)
-    ;; (unless (re-search-forward "<pre>" nil t)
-    ;;   (error "Lyrics not found"))
-    (let ((begin (point)))
-      ;; (unless (re-search-forward "</pre>" nil t)
-      ;;   (error "Lyrics not found"))
-      (copy-to-buffer buffer begin (match-beginning 0)))
-    (with-current-buffer buffer
-      (goto-char (point-min))
-      (insert (format "♪ %s - %s\n" artist title)))
-    (pop-to-buffer buffer)))
-
-(defvar jao-emms-show-lyrics/script
-  (expand-file-name "lyricwiki.rb" (file-name-directory load-file-name)))
-
 (defun jao-emms-lyrics--download (artist title)
   (message "Retrieving lyrics...")
-  (prog1
-      (shell-command-to-string (format "%s \"%s\" \"%s\""
-                                       jao-emms-show-lyrics/script
-                                       artist title))
-    (message nil)))
+  (let ((fn (jao-emms-lyrics--filename artist title)))
+    (shell-command-to-string (format "glyrc lyrics -n 1-8 -Y -a %s -t %s -w %s"
+                                     (shell-quote-argument artist)
+                                     (shell-quote-argument title)
+                                     (shell-quote-argument fn)))
+    (prog1 (jao-emms-lyrics--get-cached artist title) (message nil))))
 
 (defun jao-emms-show-lyrics (&optional force)
   (interactive "P")
@@ -150,15 +120,8 @@
       (insert (format "♪ %s - %s\n\n"
                       (propertize artist 'face jao-emms-font-lock-artist)
                       (propertize title 'face jao-emms-font-lock-title)))
-      (when lyrics
-        (insert lyrics)
-        (goto-char (point-min))
-        (when (not cached)
-          (save-excursion
-            (while (search-forward "" nil t)
-              (replace-match "" nil t)))))
-      (when (and lyrics (not cached))
-        (jao-emms-lyrics--cache artist title lyrics))
+      (when lyrics (insert lyrics))
+      (goto-char (point-min))
       (setq jao-emms-lyrics--path (jao-emms-lyrics--filename artist title)))
     (pop-to-buffer buffer)))
 
