@@ -1,6 +1,6 @@
 ;; jao-doc-view.el -- Remembering visited documents
 
-;; Copyright (c) 2013, 2015 Jose Antonio Ortega Ruiz
+;; Copyright (c) 2013, 2015, 2017 Jose Antonio Ortega Ruiz
 
 ;; This file is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -86,7 +86,7 @@
     (when (not (listp docs)) (error "Empty session"))
     (dolist (d docs) (jao-doc-view-open d))))
 
-(defun jao-doc-view-save-bmks ()
+(defun jao-doc-view--save-bmks ()
   (jao-doc-view-purge-bmks)
   (jao-doc-view--save-to-file jao-doc-view-bmk-file
                               (jao-doc-view--current-bmks)))
@@ -107,7 +107,9 @@
       (with-current-buffer b
         (when (and (equalp major-mode 'pdf-view-mode)
                    (not (equalp cb b)))
+          (jao-doc-view--save-bmk)
           (add-to-list 'docs (buffer-file-name)))))
+    (jao-doc-view--save-bmks)
     (jao-doc-view--save-to-file jao-doc-view-session-file docs)))
 
 (defun jao-doc-view--save-session-1 ()
@@ -116,19 +118,12 @@
     (jao-doc-view-save-session t)))
 
 (defun jao-doc-view-install ()
+  (jao-doc-view--current-bmks)
   (add-hook 'kill-buffer-hook 'jao-doc-view--save-bmk)
   (add-hook 'kill-buffer-hook 'jao-doc-view--save-session-1)
-  (add-hook 'kill-emacs-hook 'jao-doc-view-save-bmks)
+  (add-hook 'kill-emacs-hook 'jao-doc-view-save-session)
   (add-hook 'pdf-view-mode-hook 'jao-doc-view--goto-bmk t)
-  (add-hook 'pdf-view-mode-hook 'jao-doc-view-save-session t)
-  (dolist (c '(pdf-view-next-page-command
-               pdf-view-scroll-up-or-next-page
-               pdf-view-next-line-or-next-page
-               pdf-view-previous-page-command
-               pdf-view-scroll-down-or-previous-page
-               pdf-view-previous-line-or-previous-page
-               pdf-view-goto-page))
-    (advice-add c :after #'jao-doc-view--save-bmk)))
+  (add-hook 'pdf-view-mode-hook 'jao-doc-view-save-session t))
 
 
 
