@@ -59,13 +59,14 @@
                    (remhash k ht)))
                ht))))
 
-(defun jao-doc-view--goto-bmk ()
+(defun jao-doc-view-goto-bmk ()
   (interactive)
-  (let ((p (gethash (expand-file-name (buffer-file-name))
-                    (jao-doc-view--current-bmks)
-                    1)))
-    (when (and (numberp p) (> p 1))
-      (ignore-errors (pdf-view-goto-page p)))))
+  (when (eq major-mode 'pdf-view-mode)
+    (let* ((bmks (jao-doc-view--current-bmks))
+           (fname (buffer-file-name))
+           (p (when fname (gethash (expand-file-name fname) bmks 1))))
+      (when (and (numberp p) (> p 1))
+        (ignore-errors (pdf-view-goto-page p))))))
 
 (defun jao-doc-view-open (file)
   (let* ((buffs (buffer-list))
@@ -92,8 +93,7 @@
                               (jao-doc-view--current-bmks)))
 
 (defun jao-doc-view--save-bmk (&rest ignored)
-  (when (or (eq major-mode 'doc-view-mode)
-            (eq major-mode 'pdf-view-mode))
+  (when (eq major-mode 'pdf-view-mode)
     (ignore-errors
       (puthash (buffer-file-name)
                (max (pdf-view-current-page) 1)
@@ -120,10 +120,8 @@
 (defun jao-doc-view-install ()
   (jao-doc-view--current-bmks)
   (add-hook 'kill-buffer-hook 'jao-doc-view--save-bmk)
-  (add-hook 'kill-buffer-hook 'jao-doc-view--save-session-1)
-  (add-hook 'kill-emacs-hook 'jao-doc-view-save-session)
-  (add-hook 'pdf-view-mode-hook 'jao-doc-view--goto-bmk t)
-  (add-hook 'pdf-view-mode-hook 'jao-doc-view-save-session t))
+  (add-hook 'kill-buffer-hook 'jao-doc-view--save-session-1 t)
+  (add-hook 'kill-emacs-hook 'jao-doc-view-save-session))
 
 
 
