@@ -1,4 +1,3 @@
-;;; namazu.el --- Support for Namazu.  -*- coding: iso-2022-jp-unix; -*-
 ;; -*- Mode: Emacs-Lisp -*-
 ;;
 ;; Mule 上で Namazu を利用した検索を行うための elisp です。
