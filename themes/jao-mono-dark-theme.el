@@ -1,16 +1,17 @@
 (jao-define-custom-theme jao-mono-dark
   (:palette (fg unspecified "grey77")
-            ; (bg unspecified "#3f3f3f")
-            ; (bg unspecified "#2f2f2f")
+            ;; (bg unspecified "#3f3f3f")
+            ;; (bg unspecified "#2f2f2f")
             (bg unspecified "#222222")
             (box "color-237" "grey25")
             (button ((c 240) nul) ((c "lightskyblue1" "#4f4f4f")))
-            (hilite ((c nil "#333333")))
+            (hilite ((c nil "#505050")))
             (strike-through ((c 237)) (st))
             (italic ((c 137) it) (it (c "lightyellow3")))
-            ; (link ((c 108) nul) ((c "#F0DFAF") nit nul))
-            ; (visited-link ((c 36) nul) ((c "#E0CF9F") nul))
-            (link ((c "lemonchiffon") nit nul))
+            ;; (link ((c 108) nul) ((c "#F0DFAF") nit nul))
+            ;; (visited-link ((c 36) nul) ((c "#E0CF9F") nul))
+            (link ((c "antiquewhite3") nit nul))
+            ;; (link ((c "lemonchiffon") nit nul))
             (visited-link ((c "burlywood3") nit nul))
             (tab-sel ((c 252 232) nbf))
             (tab-unsel ((c 245 232)))
@@ -21,8 +22,9 @@
             (function ((c 115) nul nbf) ((c "palegreen3"))) ;; 108
             (type ((c 72) nbf) ((c "honeydew3")))
             (variable-name ((c nil)))
-            (constant ((c 72)) ((c "darkseagreen2")))
-            (string ((c 36)) ((c "lightcyan3"))) ;; lemonchiffon3
+            (constant ((c 72)) ((c "mediumaquamarine") nbf nit nul))
+            ;; (constant ((c 72)) ((c "lightblue3")))
+            (string ((c 36)) ((c "cadetblue"))) ;; lightcyan3 ;; lemonchiffon3
             (warning ((c 144)) ((c "#F0DFAF")))
             (error ((c 95)) ((c "goldenrod3")))
             ;; (dimm ((c 240)))
@@ -68,30 +70,22 @@
             (mode-line (c "grey60" "#2f2f2f"))
             (mode-line-inactive (c "grey50" "#3f3f3f"))
             (org-hide (c 0 nil))
-            (rcirc-other-nick (c 5))
+            (show-paren-match (c "darkseagreen1" "#5f5f5f"))
             (spaceline-modified (c "black" "lemonchiffon3") niv)
             (spaceline-read-only (c "black" "lemonchiffon4") niv)
-            (spaceline-unmodified (c nil "darkseagreen4") niv)
-            (vertical-border (c "gray35") :inherit nil)
+            (spaceline-unmodified (c "white" "darkseagreen4") niv)
+            (vertical-border (c "#3f3f3f") :inherit nil)
             (w3m-image (c "lightcyan2"))
             (w3m-tab-background (c nil nil))
             (w3m-tab-line (c 0 0) ul)
             (widget-button (c nil nil) nul))
-  (:x-colors "#050505"
+  (:x-colors "lemonchiffon"
+             "sienna3"
+             "darkseagreen3"
              "lightgoldenrod3"
-             "darkseagreen4"
-             "grey40"
+             "cadetblue4"
              "lightcyan4"
-             "paleturquoise4"
-             "grey7"
-             "grey60"
-             "grey20"
-             "sienna4"
-             "#44836e"
-             "#648f81"
-             "darkseagreen4"
-             "aquamarine4"
-             "azure4"
-             "grey60"))
+             "cadetblue3"
+             "black"))
 
 (provide 'jao-mono-dark-theme)
