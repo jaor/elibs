@@ -66,6 +66,7 @@
            (fname (buffer-file-name))
            (p (when fname (gethash (expand-file-name fname) bmks 1))))
       (when (and (numberp p) (> p 1))
+        (message "Found bookmark at page %d" p)
         (ignore-errors (pdf-view-goto-page p))))))
 
 (defun jao-doc-view-open (file)
@@ -110,7 +111,8 @@
           (jao-doc-view--save-bmk)
           (add-to-list 'docs (buffer-file-name)))))
     (jao-doc-view--save-bmks)
-    (jao-doc-view--save-to-file jao-doc-view-session-file docs)))
+    (when (> (length docs) 0)
+      (jao-doc-view--save-to-file jao-doc-view-session-file docs))))
 
 (defun jao-doc-view--save-session-1 ()
   (when (equalp major-mode 'pdf-view-mode)
