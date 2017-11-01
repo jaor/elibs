@@ -98,7 +98,7 @@
     ;; We have the old custom-library, hack around it!
     (defmacro defgroup (&rest args)
       nil)
-    (defmacro defcustom (var value doc &rest args) 
+    (defmacro defcustom (var value doc &rest args)
       (` (defvar (, var) (, value) (, doc))))
     (defmacro defface (var value doc &rest args)
       (` (make-face (, var))))
@@ -320,8 +320,8 @@ e.g.
 	(namazu-fill)
 	(if (re-search-forward namazu-output-pages-pattern nil t)
 	    (setq namazu-max-page
-		  (+ -1 (string-to-int (buffer-substring
-					(match-beginning 2) (match-end 2)))))
+		  (+ -1 (string-to-number (buffer-substring
+					   (match-beginning 2) (match-end 2)))))
 	  (setq namazu-max-page 0)))
 
       ;(goto-char (point-min))
@@ -331,6 +331,8 @@ e.g.
       (setq buffer-read-only t)
       (run-hooks 'namazu-display-hook)
       (message "Namazu running ... done.") )))
+
+(defvar namazu-default-fill-column 80)
 
 (defun namazu-fill ()
   "namazu-command $B$G$N8!:w7k2L$r@07A$7$^$9!#(B"
@@ -351,7 +353,7 @@ e.g.
 	      (beginning-of-line))
 	  ))
       ;; there is description
-      (let ((fill-column default-fill-column)
+      (let ((fill-column namazu-default-fill-column)
 	    (fill-prefix namazu-fill-prefix)
 	    (enable-kinsoku nil))
 	(insert namazu-fill-prefix)
@@ -468,7 +470,7 @@ e.g.
   "$B%$%s%G%C%/%9%G%#%l%/%H%jJ8;zNs$rJ,3d$7!"(B\"~\" $B$J$I$rE83+$7$^$9!#(B"
   (let ((tmpdir1 dirs) (dir-list (list))
 	(nmz-expand-filename (function (lambda (f)
-		(expand-file-name (namazu-unescape-dir 
+		(expand-file-name (namazu-unescape-dir
 		    (or (cdr (assoc f namazu-dir-alist)) f)))))))
     (while (string-match "\\([^\\\\]\\) " tmpdir1)
       (save-match-data
@@ -529,7 +531,7 @@ e.g.
 (defun namazu-make-field-completion-alist (namazu-dirs)
   "make \'+files:\' completion alist."
   (let (dir flist fields fname el
-	 (dirs (namazu-split-dir 
+	 (dirs (namazu-split-dir
 		(or namazu-dirs namazu-default-dir
 		    (setq namazu-default-dir (namazu-get-default-index-dir))))))
     (while (setq dir (car dirs))
@@ -972,8 +974,8 @@ mouse $B$N??$sCf$N%\%?%s$r2!$9$H!"2!$7$?0LCV$K$h$C$F!"(B\"$BJ8>O$r;2>H(B\"$
   (add-hook 'namazu-display-hook
 	    'hilit-rehighlight-buffer-quietly)))
 
-;; Message highlight functions. 
-;; e.g. 
+;; Message highlight functions.
+;; e.g.
 ;; (setq namazu-msg-highlight-function 'namazu-msg-highlight-mew)
 
 ;;
