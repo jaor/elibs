@@ -1,6 +1,6 @@
 ;; jao-doc-view.el -- Remembering visited documents
 
-;; Copyright (c) 2013, 2015, 2017 Jose Antonio Ortega Ruiz
+;; Copyright (c) 2013, 2015, 2017, 2018 Jose Antonio Ortega Ruiz
 
 ;; This file is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -52,12 +52,11 @@
 
 (defun jao-doc-view-purge-bmks ()
   (interactive)
-  (let ((ht jao-doc-view--current-bmks))
-    (when ht
-      (maphash (lambda (k v)
-                 (when (or (= 1 v) (not (file-exists-p k)))
-                   (remhash k ht)))
-               ht))))
+  (when jao-doc-view--current-bmks
+    (maphash (lambda (k v)
+               (when (or (= 1 v) (not (file-exists-p k)))
+                 (remhash k jao-doc-view--current-bmks)))
+             jao-doc-view--current-bmks)))
 
 (defun jao-doc-view-goto-bmk ()
   (interactive)
@@ -76,7 +75,9 @@
                 (when (string-equal (buffer-file-name (car buffs)) file)
                   (throw 'done (car buffs)))
                 (setq buffs (cdr buffs))))))
-    (if b (pop-to-buffer b) (find-file file))))
+    (if b
+        (pop-to-buffer b)
+      (when (file-exists-p file) (find-file file)))))
 
 (defun jao-doc-view-session (&optional file)
   (let ((file (or file jao-doc-view-session-file)))
