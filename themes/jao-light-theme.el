@@ -3,7 +3,7 @@
             (bg unspecified "white")
             (box "grey80" "antiquewhite3")
             (button ((c 13 nil) nbf nul) (~ mode-line-inactive))
-            (hilite ((c nil "grey90")) ((c nil 15))) ;; 5
+            (hilite ((c nil "grey90")) ((c nil "#EFEBE7"))) ;; 5
             (strike-through ((c 1)) (st))
 ;;            (italic ((c nil) it :family "DejaVu Sans Mono" :height 90))
 ;;            (italic ((c "darkslategray4")))
@@ -13,23 +13,20 @@
             (visited-link ((c 23) nul nbf))
             (tab-sel ((~ mode-line)))
             (tab-unsel ((~ mode-line-inactive)))
-            (comment ((c 241) it :family "Inconsolata LGC" :height 90))
-;;            (comment ((c 241) it))
-;;            (keyword ((c 24 nil) nbf))
+            (comment ((c 241) it :family "Inconsolata LGC" :height 90)
+                     ((c 241) it))
             (keyword ((c "lightsteelblue4" nil) bf))
-            (type ((c 59) nbf nul nit) ((c 14) nbf))
+            (type ((c 59) nbf nul nit) ((c "#223142") nbf))
             (function ((c 30 nil) nbf))
-;;                      ((c 30 nil) nit :family "Inconsolata LGC" :height 90))
-;;            (function ((c 31 nil) nbf) ((c 0 nil) nbf it ul))
-            (variable-name ((c 0)))
+            (variable-name ((c 0)) ((c "black")))
             (constant ((c 23)))
             (string ((c 58)) ((c 29)))
-            (warning ((c 9)))
-            (error ((c 1)))
-            (dimm ((c 102)) ((c 12)))
-            (gnus-mail ((c 232)) ((c 0)))
-            (gnus-news ((c 232)) ((c 0)))
-            (outline ((c 0)))
+            (warning ((c 9)) ((c "orangered4")))
+            (error ((c 1) (c "sienna3")))
+            (dimm ((c 102)) ((c "lemonchiffon4")))
+            (gnus-mail ((c 232)) ((c "black")))
+            (gnus-news ((c 232)) ((c "black")))
+            (outline ((c "black")))
             (f00 ((c 30)) ((c 23))) ;; 14
             (f01 ((c 31)) ((c 24)))
             (f02 ((c 37)) ((c 30))) ;; 8
@@ -65,18 +62,18 @@
           (w3m-bold (c nil nil) bf)
           (w3m-image (c 94))
           (w3m-tab-background (c 12 15)))
-  (:x-faces (bold (c 14) bf)
-            (button (c 10 nil) nbf)
+  (:x-faces (bold (c "#223142") bf)
+            (button (c "darkslategray") nbf nul)
             (gnus-button (c nil nil) nbf)
-            (compilation-info (c 14 nil) nbf)
-            (cursor (c 1 1))
+            (compilation-info (c "#223142" nil) nbf)
+            (cursor (c "sienna3" "sienna3"))
             (diary (p error) nbf)
-            (diff-hl-change (c "white" "lemonchiffon1"))
+            (diff-hl-change (c "white" "lightsteelblue1"))
             (diff-hl-insert (c "white" "honeydew2"))
             (diff-hl-delete (c "white" "wheat1"))
             (fringe (c "grey70" nil))
-            (gnus-summary-selected (c 2) nbf)
-            (gnus-summary-cancelled (c 1) st)
+            (gnus-summary-selected (c "#597B59") nbf)
+            (gnus-summary-cancelled (c "sienna3") st)
             (header-line (c nil "#efebe7"))
             (lui-track-bar (c "red" nil) :height 0.8 ul st :overline t)
             ;; (mode-line (c "grey15" 7) :box (:line-width -1 :color "grey90"))
@@ -89,17 +86,21 @@
             (mode-line-buffer-id (c "orange4") nbf nit)
             (spaceline-read-only (c nil "lightgoldenrod2") niv)
             (spaceline-modified (c nil "goldenrod1") bf nit)
-            (spaceline-unmodified (c nil "white") niv)
+            (spaceline-unmodified (c nil "lightsteelblue") niv)
             (org-hide (c "white" "white"))
             (vertical-border (c "grey70" nil))
             (w3m-image (c "midnightblue" "azure2"))
-            (w3m-bold (c 10) bf)
-            (w3m-tab-selected (c 9 15) bf)
+            (w3m-bold (c "darkslategray") bf)
+            (w3m-tab-selected (c "orangered4" "white") bf)
             (w3m-tab-selected-retrieving (~ w3m-tab-selected) (c 1))
-            (w3m-tab-background (c 15 15) nul))
-  (:x-colors "black" "sienna3" "#597B59" "#D38108" "#3B3152"
-             "#E0DACC" "lightyellow3"
-             "#EFEBE7" "grey20" "orangered4" "darkslategray" "#59513A"
-             "lemonchiffon4" "#386858" "#223142" "#EFEBE7"))
+            (w3m-tab-background (c "white" "white") nul))
+  (:x-colors "black"
+             "darkslategrey"
+             "lightcyan4"
+             "cadetblue4"
+             "lightgoldenrod3"
+             "darkseagreen4"
+             "sienna3"
+             "lemonchiffon3"))
 
 (provide 'jao-light-theme)
