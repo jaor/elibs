@@ -1,6 +1,6 @@
 ;; jao-emms-random-album.el -- play random albums in emms
 
-;; Copyright (C) 2009, 2010, 2017 Jose Antonio Ortega Ruiz
+;; Copyright (C) 2009, 2010, 2017, 2018 Jose Antonio Ortega Ruiz
 
 ;; Author: Jose Antonio Ortega Ruiz <jao@gnu.org>
 ;; Start date: Sat Jul 04, 2009 13:06
@@ -95,11 +95,10 @@
       (ignore-errors (emms-browser-clear-playlist))
       (emms-browse-by-album)
       (jao-emms-goto-random-album)
-      (emms-browser-add-tracks-and-play)
-      (when jao-emms-random-album-notify-p
-        (jao-notify (substring-no-properties (thing-at-point 'line) 0 -1)
-                    "Next album"
-                    jao-emms-random-album-notify-icon))
+      (let ((album (substring-no-properties (thing-at-point 'line) 0 -1)))
+        (emms-browser-add-tracks-and-play)
+        (when jao-emms-random-album-notify-p
+          (jao-notify album "Next album" jao-emms-random-album-notify-icon)))
       (emms-browser-bury-buffer))))
 
 (defun jao-emms-random-album-reset ()
