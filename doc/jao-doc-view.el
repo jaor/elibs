@@ -1,6 +1,6 @@
 ;; jao-doc-view.el -- Remembering visited documents
 
-;; Copyright (c) 2013, 2015, 2017, 2018 Jose Antonio Ortega Ruiz
+;; Copyright (c) 2013, 2015, 2017, 2018, 2019 Jose Antonio Ortega Ruiz
 
 ;; This file is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -120,11 +120,26 @@
     (jao-doc-view-purge-bmks)
     (jao-doc-view-save-session t)))
 
+(defvar jao-doc-session-timer nil)
+(defvar jao-doc-session-timer-seconds 60)
+
+(defun jao-doc-view-stop-session-timer ()
+  (when jao-doc-session-timer
+    (cancel-timer jao-doc-session-timer)
+    (setq jao-doc-session-timer nil)))
+
+(defun jao-doc-view-start-session-timer ()
+  (setq jao-doc-session-timer
+        (run-with-idle-timer jao-doc-session-timer-seconds
+                             t
+                             'jao-doc-view-save-session)))
+
 (defun jao-doc-view-install ()
   (jao-doc-view--current-bmks)
   (add-hook 'kill-buffer-hook 'jao-doc-view--save-bmk)
   (add-hook 'kill-buffer-hook 'jao-doc-view--save-session-1 t)
-  (add-hook 'kill-emacs-hook 'jao-doc-view-save-session))
+  (add-hook 'kill-emacs-hook 'jao-doc-view-save-session)
+  (jao-doc-view-start-session-timer))
 
 
 
