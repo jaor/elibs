@@ -1,6 +1,6 @@
 ;;; jao-frm.el --- use frm to show mailbox
 
-;; Copyright (C) 2004, 2005, 2006, 2007, 2008, 2009, 2010
+;; Copyright (C) 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2019
 
 ;; Author: Jose Antonio Ortega Ruiz <jao@gnu.org>
 ;; Keywords: mail
@@ -37,6 +37,7 @@
 
 (defgroup jao-frm nil
   "Frm-base mailbox checker"
+  :group 'mail
   :prefix "jao-frm-")
 
 (defcustom jao-frm-exec-path "frm"
@@ -106,7 +107,7 @@
   (set (make-local-variable 'next-line-add-newlines) nil)
   (setq major-mode 'jao-frm-mode)
   (setq mode-name "frm")
-  (toggle-read-only 1)
+  (read-only-mode 1)
   (goto-char 1))
 
 ;;;; Mode commands:
@@ -131,7 +132,7 @@
     (when (search-forward-regexp "^ +\\([0-9]+\\):" nil t)
       (let ((mn (string-to-number (match-string 1))))
         (when (y-or-n-p (format "Delete message number %d? " mn))
-          (toggle-read-only -1)
+          (read-only-mode -1)
           (shell-command (format "echo 'd %d'|mail" mn) t)
           (jao-frm)
           (when (= (point-max) (point-min))
