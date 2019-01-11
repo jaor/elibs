@@ -124,15 +124,21 @@
 (defvar jao-doc-session-timer-seconds 60)
 
 (defun jao-doc-view-stop-session-timer ()
+  (interactive)
   (when jao-doc-session-timer
     (cancel-timer jao-doc-session-timer)
     (setq jao-doc-session-timer nil)))
 
+(defun jao-doc-view--save-session ()
+  (let ((inhibit-message t))
+    (jao-doc-view-save-session)))
+
 (defun jao-doc-view-start-session-timer ()
+  (interactive)
   (setq jao-doc-session-timer
         (run-with-idle-timer jao-doc-session-timer-seconds
                              t
-                             'jao-doc-view-save-session)))
+                             'jao-doc-view--save-session)))
 
 (defun jao-doc-view-install ()
   (jao-doc-view--current-bmks)
