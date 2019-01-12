@@ -1,12 +1,3 @@
 * Elisp libraries
 
-  - *themes* color themes based on Emacs builtin custom themes
-  - *org* utilities for org-mode
-  - *emms* utilities for EMMS
-  - *prog* utilities for programming modes
-  - *skels* skeletons for source files
-  - *net* utilities for networking (w3m, weather &c.)
-  - *sys* generic utilities for external programs
-  - *bmk* a web bookmark manager
-
-  See also my [[http://git.hacks-galore.org/gitweb/jao?p=emacs.git;a=tree;f=custom;hb=HEAD][emacs custom files]].
+ This project has been moved to [gitlab](https://gitlab.com/jaor/elibs).  Sorry for any inconvinience, and see you there!
