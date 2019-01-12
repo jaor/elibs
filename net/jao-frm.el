@@ -79,7 +79,10 @@
     (define-key map [?q] 'jao-frm-delete-window)
     (define-key map [?n] 'next-line)
     (define-key map [?p] 'previous-line)
-    (define-key map [?g] jao-frm-mail-command)
+    (define-key map [?r] 'jao-frm)
+    (define-key map [?g] (lambda ()
+                           (interactive)
+                           (funcall jao-frm-mail-command)))
     (define-key map [(control k)] 'jao-frm-delete-message)
     map))
 
